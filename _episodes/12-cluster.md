@@ -72,11 +72,9 @@ devices are anchored to the "root" directory, which is `/`:
 {{ site.remote.prompt }} ls /
 ```
 {: .language-bash}
-```
-bin   etc   lib64  proc  sbin     sys  var
-boot  {{ site.remote.homedir | replace: "/", "" }}  mnt    root  scratch  tmp  working
-dev   lib   opt    run   srv      usr
-```
+
+{% include {{ site.snippets }}/cluster/root-folders.snip %}
+
 {: .output}
 
 The "{{ site.remote.homedir | replace: "/", "" }}" directory is the one where
@@ -85,22 +83,25 @@ system files and change as you install new software or upgrade your OS.
 
 > ## Using HPC filesystems
 >
-> On HPC systems, you have a number of places where you can store your files.
+> On Geene, you have a number of places where you can store your files.
 > These differ in both the amount of space allocated and whether or not they
 > are backed up.
 >
-> * __Home__ -- often a _network filesystem_, data stored here is available
->   throughout the HPC system, and often backed up periodically. Files stored
->   here are typically slower to access, the data is actually stored on another
->   computer and is being transmitted and made available over the network!
-> * __Scratch__ -- typically faster than the networked Home directory, but not
+> * __Home__ -- data stored here is available throughout the HPC system,
+>   and often backed up periodically. Please note the limit on the number
+>   of files (inodes) which can get used up easily. Use the `myquota` command
+>   to ensure that you are not running out of inodes!
+> * __Scratch__ -- used for temporary file storage while running jobs. It is
+>   not backed up and files that are unused for over 60 days are purged.
 >   usually backed up, and should not be used for long term storage.
-> * __Work__ -- sometimes provided as an alternative to Scratch space, Work is
->   a fast file system accessed over the network. Typically, this will have
->   higher performance than your home directory, but lower performance than
->   Scratch; it may not be backed up. It differs from Scratch space in that
->   files in a work file system are not automatically deleted for you: you must
->   manage the space yourself.
+> * __Vast__ -- flash-drive based system that is optimal for workloads with
+>   high I/O rates. Like the `scratch` storage, it is also not backed up and
+>   files that are unused for over 60 days are purged.
+> * __RPS__ -- provides data storage space for research projects that is
+>   easily shared amongst collaborators, backed up, and not subject to the
+>   old file purging policy. Note that it is a paid service.
+> * __Archive__ -- provide a space for long-term storage of research output
+>   and is unaccessible by running jobs.
 {: .callout}
 
 ## Nodes
@@ -131,12 +132,11 @@ This may show only your user ID, but there are likely several other people
 
 > ## Dedicated Transfer Nodes
 >
-> If you want to transfer larger amounts of data to or from the cluster, some
-> systems offer dedicated nodes for data transfers only. The motivation for
+> If you want to transfer larger amounts of data to or from the cluster, Greene
+> offers dedicated nodes for data transfers only. The motivation for
 > this lies in the fact that larger data transfers should not obstruct
-> operation of the login node for anybody else. Check with your cluster's
-> documentation or its support team if such a transfer node is available. As a
-> rule of thumb, consider all transfers of a volume larger than 500 MB to 1 GB
+> operation of the login node for anybody else. As a rule of thumb, consider
+> all transfers of a volume larger than 500 MB to 1 GB
 > as large. But these numbers change, e.g., depending on the network connection
 > of yourself and of your cluster or other factors.
 {: .callout}
@@ -287,12 +287,8 @@ connect to a shared, remote fileserver or cluster of servers.
 >
 > > ## Solution
 > >
-> > Compute nodes are usually built with processors that have _higher
-> > core-counts_ than the login node or personal computers in order to support
-> > highly parallel tasks. Compute nodes usually also have substantially _more
-> > memory (RAM)_ installed than a personal computer. More cores tends to help
-> > jobs that depend on some work that is easy to perform in _parallel_, and
-> > more, faster memory is key for large or _complex numerical tasks_.
+> > Compute nodes have substantially _more memory (RAM)_ installed than a personal
+> > computer. More, faster memory is key for large or _complex numerical tasks_.
 > {: .solution}
 {: .discussion}
 
