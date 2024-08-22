@@ -65,6 +65,128 @@ Even if your cluster does not require it, the next section will guide you
 through the use of SSH keys and an SSH agent to both strengthen your security
 _and_ make it more convenient to log in to remote systems.
 
+## Log In to the Cluster
+
+If you are connecting from a remote location that is not on the NYU network (your home
+for example), you have two options:
+
+* VPN Option: [set up your computer to use the NYU VPN]
+  (<https://www.nyu.edu/life/information-technology/infrastructure/network-services/vpn.html>)
+  . Once you've created a VPN connection, you can proceed as if you were connected to the NYU net.
+* Gateway Option: go through our gateway servers (example below). Gateways are designed to
+  support only a very minimal set of commands and their only purpose is to let users connect
+  HPC systems without needing to first connect to the VPN.
+
+You do not need to use the NYU VPN or gateways if you are connected to the NYU network (wired
+connection in your office or WiFi) or if you have VPN connection initiated. In this case you
+can ssh directly to the clusters.
+
+> ## Before copying these command typing them on your computer
+>
+> Replace `{{ site.remote.user }}` with your username for all the instructions below!
+{: .callout}
+
+If you choose the Gateway Option, start by hopping onto the gateway nodes first by:
+```
+{{ site.local.prompt }} ssh {{ site.remote.user }}@gw.hpc.nyu.edu
+```
+{: .language-bash}
+
+You are now finally ready to connect to the Greene cluster. To login, go ahead and open
+your terminal or graphical SSH client and execute the following command:
+
+```
+{{ site.local.prompt }} ssh {{ site.remote.user }}@{{ site.remote.login }}
+```
+{: .language-bash}
+
+You may be asked for your password. Watch out: the characters you type after
+the password prompt are not displayed on the screen. Normal output will resume
+once you press `Enter`.
+
+You may have noticed that the prompt changed when you logged into the remote
+system using the terminal (if you logged in using PuTTY this will not apply
+because it does not offer a local terminal). This change is important because
+it can help you distinguish on which system the commands you type will be run
+when you pass them into the terminal. This change is also a small complication
+that we will need to navigate throughout the workshop. Exactly what is displayed
+as the prompt (which conventionally ends in `$`) in the terminal when it is
+connected to the local system and the remote system will typically be different
+for every user. We still need to indicate which system we are entering commands
+on though so we will adopt the following convention:
+
+* `{{ site.local.prompt }}` when the command is to be entered on a terminal
+  connected to your local computer
+* `{{ site.remote.prompt }}` when the command is to be entered on a
+  terminal connected to the remote system
+* `$` when it really doesn't matter which system the terminal is connected to.
+
+## Looking Around Your Remote Home
+
+Very often, many users are tempted to think of a high-performance computing
+installation as one giant, magical machine. Sometimes, people will assume that
+the computer they've logged onto is the entire computing cluster. So what's
+really happening? What computer have we logged on to? The name of the current
+computer we are logged onto can be checked with the `hostname` command. (You
+may also notice that the current hostname is also part of our prompt!)
+
+```
+{{ site.remote.prompt }} hostname
+```
+{: .language-bash}
+
+```
+{{ site.remote.host }}
+```
+{: .output}
+
+So, we're definitely on the remote machine. Next, let's find out where we are
+by running `pwd` to **p**rint the **w**orking **d**irectory.
+
+```
+{{ site.remote.prompt }} pwd
+```
+{: .language-bash}
+
+```
+{{ site.remote.homedir }}/{{ site.remote.user }}
+```
+{: .output}
+
+Great, we know where we are! Let's see what's in our current directory:
+
+```
+{{ site.remote.prompt }} ls
+```
+{: .language-bash}
+```
+id_ed25519.pub
+```
+{: .output}
+
+The system administrators may have configured your home directory with some
+helpful files, folders, and links (shortcuts) to space reserved for you on
+other filesystems. If they did not, your home directory may appear empty. To
+double-check, include hidden files in your directory listing:
+
+```
+{{ site.remote.prompt }} ls -a
+```
+{: .language-bash}
+```
+  .            .bashrc           id_ed25519.pub
+  ..           .ssh
+```
+{: .output}
+
+In the first column, `.` is a reference to the current directory and `..` a
+reference to its parent (`{{ site.remote.homedir }}`). You may or may not see
+the other files, or files like them: `.bashrc` is a shell configuration file,
+which you can edit with your preferences; and `.ssh` is a directory storing SSH
+keys and a record of authorized connections.
+
+{% unless site.remote.portal %}
+
 ### Better Security With SSH Keys
 
 The [Lesson Setup]({{ page.root }}/setup) provides instructions for installing
@@ -246,7 +368,7 @@ Open your terminal application and check if an agent is running:
   {{ site.local.prompt }} eval $(ssh-agent)
   ```
   {: .language-bash}
-  
+
   > ## What's in a `$(...)`?
   >
   > The syntax of this SSH Agent command is unusual, based on what we've seen
@@ -283,7 +405,7 @@ Add your key to the agent, with session expiration after 8 hours:
 ```
 {: .language-bash}
 ```
-Enter passphrase for .ssh/id_ed25519: 
+Enter passphrase for .ssh/id_ed25519:
 Identity added: .ssh/id_ed25519
 Lifetime set to 86400 seconds
 ```
@@ -312,113 +434,7 @@ Use the **s**ecure **c**o**p**y tool to send your public key to the cluster.
 {: .language-bash}
 {% endif %}
 
-## Log In to the Cluster
-
-Go ahead and open your terminal or graphical SSH client, then log in to the
-cluster. Replace `{{ site.remote.user }}` with your username or the one
-supplied by the instructors.
-
-```
-{{ site.local.prompt }} ssh {{ site.remote.user }}@{{ site.remote.login }}
-```
-{: .language-bash}
-
-You may be asked for your password. Watch out: the characters you type after
-the password prompt are not displayed on the screen. Normal output will resume
-once you press `Enter`.
-
-You may have noticed that the prompt changed when you logged into the remote
-system using the terminal (if you logged in using PuTTY this will not apply
-because it does not offer a local terminal). This change is important because
-it can help you distinguish on which system the commands you type will be run
-when you pass them into the terminal. This change is also a small complication
-that we will need to navigate throughout the workshop. Exactly what is displayed
-as the prompt (which conventionally ends in `$`) in the terminal when it is
-connected to the local system and the remote system will typically be different
-for every user. We still need to indicate which system we are entering commands
-on though so we will adopt the following convention:
-
-* `{{ site.local.prompt }}` when the command is to be entered on a terminal
-  connected to your local computer
-* `{{ site.remote.prompt }}` when the command is to be entered on a
-  terminal connected to the remote system
-* `$` when it really doesn't matter which system the terminal is connected to.
-
-## Looking Around Your Remote Home
-
-Very often, many users are tempted to think of a high-performance computing
-installation as one giant, magical machine. Sometimes, people will assume that
-the computer they've logged onto is the entire computing cluster. So what's
-really happening? What computer have we logged on to? The name of the current
-computer we are logged onto can be checked with the `hostname` command. (You
-may also notice that the current hostname is also part of our prompt!)
-
-```
-{{ site.remote.prompt }} hostname
-```
-{: .language-bash}
-
-```
-{{ site.remote.host }}
-```
-{: .output}
-
-So, we're definitely on the remote machine. Next, let's find out where we are
-by running `pwd` to **p**rint the **w**orking **d**irectory.
-
-```
-{{ site.remote.prompt }} pwd
-```
-{: .language-bash}
-
-```
-{{ site.remote.homedir }}/{{ site.remote.user }}
-```
-{: .output}
-
-Great, we know where we are! Let's see what's in our current directory:
-
-```
-{{ site.remote.prompt }} ls
-```
-{: .language-bash}
-```
-id_ed25519.pub
-```
-{: .output}
-
-The system administrators may have configured your home directory with some
-helpful files, folders, and links (shortcuts) to space reserved for you on
-other filesystems. If they did not, your home directory may appear empty. To
-double-check, include hidden files in your directory listing:
-
-```
-{{ site.remote.prompt }} ls -a
-```
-{: .language-bash}
-```
-  .            .bashrc           id_ed25519.pub
-  ..           .ssh
-```
-{: .output}
-
-In the first column, `.` is a reference to the current directory and `..` a
-reference to its parent (`{{ site.remote.homedir }}`). You may or may not see
-the other files, or files like them: `.bashrc` is a shell configuration file,
-which you can edit with your preferences; and `.ssh` is a directory storing SSH
-keys and a record of authorized connections.
-
-{% unless site.remote.portal %}
-
 ### Install Your SSH Key
-
-> ## There May Be a Better Way
->
-> Policies and practices for handling SSH keys vary between HPC clusters:
-> follow any guidance provided by the cluster administrators or
-> documentation. In particular, if there is an online portal for managing SSH
-> keys, use that instead of the directions outlined here.
-{: .callout}
 
 If you transferred your SSH public key with `scp`, you should see
 `id_ed25519.pub` in your home directory. To "install" this key, it must be
@@ -453,6 +469,7 @@ password for your SSH key.
 {{ site.local.prompt }} ssh {{ site.remote.user }}@{{ site.remote.login }}
 ```
 {: .language-bash}
+
 {% endunless %}
 
 {% include links.md %}
