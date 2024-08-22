@@ -5,7 +5,7 @@ on:
   pull_request:
   push:
     branches:
-      - gh-pages
+      - nyu_greene
 
 jobs:
   lint_common_files:
