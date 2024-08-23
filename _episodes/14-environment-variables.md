@@ -41,20 +41,23 @@ Let's start by running the command `set` and looking at some of the variables
 in a typical shell session:
 
 ~~~
-$ set
+$ printenv
 ~~~
 {: .language-bash}
 
 ~~~
-COMPUTERNAME=TURING
-HOME=/home/vlad
-HOSTNAME=TURING
-HOSTTYPE=i686
-NUMBER_OF_PROCESSORS=4
-PATH=/Users/vlad/bin:/usr/local/git/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
-PWD=/home/vlad
-UID=1000
-USERNAME=vlad
+SHELL=/bin/bash
+WINDOWID=87
+SINGULARITY_CACHEDIR=/state/partition1/yourUsername-singularity-cache
+COLORTERM=truecolor
+HISTCONTROL=ignoredups
+HISTSIZE=1000
+HOSTNAME=log-3
+FPATH=/usr/share/zsh/5.5.1/functions:/usr/share/zsh/5.5.1/functions:/share/apps/lmod/8.4.9/lmod/lmod/init/ksh_funcs
+SSH_AUTH_SOCK=/tmp/ssh-XXXXb32gan/agent.3025643
+__LMOD_REF_COUNT_MODULEPATH=/share/apps/modulefiles:1
+VAST=/vast/yourUsername
+LMOD_DIR=/share/apps/lmod/8.4.9/lmod/lmod/libexec
 ...
 ~~~
 {: .output}
@@ -97,7 +100,7 @@ $ echo $HOME
 {: .language-bash}
 
 ~~~
-/home/vlad
+/home/yourUsername
 ~~~
 {: .output}
 
@@ -105,7 +108,7 @@ The dollar sign tells the shell that we want the *value* of the variable
 rather than its name.
 This works just like wildcards:
 the shell does the replacement *before* running the program we've asked for.
-Thanks to this expansion, what we actually run is `echo /home/vlad`,
+Thanks to this expansion, what we actually run is `echo /home/yourUsername`,
 which displays the right thing.
 
 ## Creating and Changing Variables
@@ -140,7 +143,7 @@ Camilla
 
 ## Environment variables
 
-When  we ran the `set` command we saw there were a lot of variables whose names
+When  we ran the `printenv` command we saw there were a lot of variables whose names
 were in upper case. That's because, by convention, variables that are also
 available to use by _other_ programs are given upper-case names. Such variables
 are called _environment variables_ as they are shell variables that are defined
@@ -222,13 +225,18 @@ To show how this works,
 here are the components of `PATH` listed one per line:
 
 ~~~
-/Users/vlad/bin
-/usr/local/git/bin
-/usr/bin
-/bin
-/usr/sbin
-/sbin
+/share/apps/singularity/bin
+/share/apps/local/bin
+/home/yourUsername/.local/bin
+/home/yourUsername/bin
+/share/apps/singularity/bin
+/share/apps/local/bin
 /usr/local/bin
+/usr/bin
+/usr/local/sbin
+/usr/sbin
+/usr/lpp/mmfs/bin
+/opt/slurm/bin
 ~~~
 {: .output}
 
@@ -237,12 +245,12 @@ there are actually three programs called `analyze`
 in three different directories:
 `/bin/analyze`,
 `/usr/local/bin/analyze`,
-and `/users/vlad/analyze`.
+and `/users/yourUsername/analyze`.
 Since the shell searches the directories in the order they're listed in `PATH`,
 it finds `/bin/analyze` first and runs that.
-Notice that it will *never* find the program `/users/vlad/analyze`
+Notice that it will *never* find the program `/users/yourUsername/analyze`
 unless we type in the full path to the program,
-since the directory `/users/vlad` isn't in `PATH`.
+since the directory `/users/yourUsername` isn't in `PATH`.
 
 This means that I can have executables in lots of different places as long as
 I remember that I need to to update my `PATH` so that my shell can find them.
