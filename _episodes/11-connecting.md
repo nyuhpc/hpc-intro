@@ -112,10 +112,9 @@ following into `~/.ssh/config` file:
 If you are connecting from a remote location that is not on the NYU network (your home
 for example), you have two options:
 
-* VPN Option: [set up your computer to use the NYU VPN]
-  (<https://www.nyu.edu/life/information-technology/infrastructure/network-services/vpn.html>)
-  . Once you've created a VPN connection, you can proceed as if you were connected to the NYU net.
-* Gateway Option: go through our gateway servers (example below). Gateways are designed to
+* Using the VPN: [set up your computer to use the NYU VPN][NYU-VPN]. Once you've created
+  a VPN connection, you can proceed as if you were connected to the NYU net.
+* Using the HPC Gateway: go through our gateway servers (example below). Gateways are designed to
   support only a very minimal set of commands and their only purpose is to let users connect
   HPC systems without needing to first connect to the VPN.
 
@@ -526,3 +525,4 @@ password for your SSH key.
 [ssh-flags]: https://stribika.github.io/2015/01/04/secure-secure-shell.html
 [wiki-rsa]: https://en.wikipedia.org/wiki/RSA_(cryptosystem)
 [wiki-dsa]: https://en.wikipedia.org/wiki/EdDSA
+[NYU-VPN]: https://www.nyu.edu/life/information-technology/infrastructure/network-services/vpn.html
