@@ -275,33 +275,6 @@ Upload the lesson material to your remote home directory like so:
 ```
 {: .language-bash}
 
-> ## Why Not Download on {{ site.remote.name }} Directly?
->
-> Most computer clusters are protected from the open internet by a _firewall_.
-> For enhanced security, some are configured to allow traffic _inbound_, but
-> not _outbound_.
-> This means that an authenticated user can send a file to a cluster machine,
-> but a cluster machine cannot retrieve files from a user's machine or the
-> open Internet.
->
-> Try downloading the file directly. Note that it may well fail, and that's
-> OK!
->
-> > ## Commands
-> >
-> > ```
-> > {{ site.local.prompt }} ssh {{ site.remote.user }}@{{ site.remote.login }}
-> > {{ site.remote.prompt }} wget -O amdahl.tar.gz https://github.com/hpc-carpentry/amdahl/tarball/main
-> > # or
-> > {{ site.remote.prompt }} curl -o amdahl.tar.gz https://github.com/hpc-carpentry/amdahl/tarball/main
-> > ```
-> > {: .language-bash}
-> {: .solution}
->
-> Did it work? If not, what does the terminal output tell you about what
-> happened?
-{: .challenge}
-
 ## Transferring a Directory
 
 To transfer an entire directory, we add the `-r` flag for "**r**ecursive":
