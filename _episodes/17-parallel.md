@@ -34,14 +34,47 @@ If you disconnected, log back in to the cluster.
 
 With the Amdahl source code on the cluster, we can install it, which will
 provide access to the `amdahl` executable.
-Move into the extracted directory, then use the Package Installer for Python,
-or `pip`, to install it in your ("user") home directory:
+
+The Amdahl code has one dependency: __mpi4py__. Package Installer for
+Python (`pip`) will collect mpi4py from the Internet and install it for
+you, but it needs an active `mpi` module. Here we will load
+`openmpi/gcc/4.1.6` to build `mpi4py`.
+
+Move into the extracted directory, the use `pip`, to install
+it in your ("user") home directory:
 
 ```
 {{ site.remote.prompt }} cd amdahl
-{{ site.remote.prompt }} python3 -m pip install --user .
+{{ site.remote.prompt }} module load python/intel/3.8.6
+{{ site.remote.prompt }} python3 -m venv ./test_venv
+{{ site.remote.prompt }} source ./test_venv/bin/activate
+{{ site.remote.prompt }} module load openmpi/gcc/4.1.6
+{{ site.remote.prompt }} python3 -m pip install .
 ```
 {: .language-bash}
+
+```
+Processing /home/ss19980/packages/temp/hpc-carpentry-amdahl-46c9b4b
+Collecting mpi4py
+  Using cached mpi4py-4.0.0.tar.gz (464 kB)
+  Installing build dependencies ... done
+  Getting requirements to build wheel ... done
+  Installing backend dependencies ... done
+    Preparing wheel metadata ... done
+Building wheels for collected packages: amdahl, mpi4py
+  Building wheel for amdahl (setup.py) ... done
+  Created wheel for amdahl: filename=amdahl-0.3.1-py3-none-any.whl size=6996 sha256=13a95c3e6fbc53fde1c90a4a9bbb3fd3179d5e3afa3e19b4131a05d9ac798981
+  Stored in directory: /home/ss19980/.cache/pip/wheels/2c/53/fc/19c3053b3a1d3625ac26158b28f263783f66ec258df97aefcf
+  Building wheel for mpi4py (PEP 517) ... done
+  Created wheel for mpi4py: filename=mpi4py-4.0.0-cp38-cp38-linux_x86_64.whl size=5169079 sha256=9afceb56e22608a7de33442a60bbde3cbd4aa06947d48de5f6dc63932d34bc9f
+  Stored in directory: /home/ss19980/.cache/pip/wheels/31/3b/6f/dc579e9ff3e2273078596b0cbc1e8d6cbf5a3a05cfad4a380a
+Successfully built amdahl mpi4py
+Installing collected packages: mpi4py, amdahl
+Successfully installed amdahl-0.3.1 mpi4py-4.0.0
+WARNING: You are using pip version 20.2.3; however, version 24.2 is available.
+You should consider upgrading via the '/home/ss19980/packages/temp/hpc-carpentry-amdahl-46c9b4b/test_venv/bin/python3 -m pip install --upgrade pip' command.
+```
+{: .output}
 
 > ## Amdahl is Python Code
 >
@@ -50,80 +83,6 @@ or `pip`, to install it in your ("user") home directory:
 > If it can't be found, try listing available modules using `module avail`,
 > load the appropriate one, and try the command again.
 {: .callout}
-
-### MPI for Python
-
-The Amdahl code has one dependency: __mpi4py__.
-If it hasn't already been installed on the cluster, `pip` will attempt to
-collect mpi4py from the Internet and install it for you.
-If this fails due to a one-way firewall, you must retrieve mpi4py on your
-local machine and upload it, just as we did for Amdahl.
-
-> ## Retrieve and Upload `mpi4py`
->
-> If installing Amdahl failed because mpi4py could not be installed,
-> retrieve the tarball from <https://github.com/mpi4py/mpi4py/tarball/master>
-> then `rsync` it to the cluster, extract, and install:
->
-> ```
-> {{ site.local.prompt }} wget -O mpi4py.tar.gz https://github.com/mpi4py/mpi4py/releases/download/3.1.4/mpi4py-3.1.4.tar.gz
-> {{ site.local.prompt }} scp mpi4py.tar.gz {{ site.remote.user }}@{{ site.remote.login }}:
-> # or
-> {{ site.local.prompt }} rsync -avP mpi4py.tar.gz {{ site.remote.user }}@{{ site.remote.login }}:
-> ```
-> {: .language-bash}
->
-> ```
-> {{ site.local.prompt }} ssh {{ site.remote.user }}@{{ site.remote.login }}
-> {{ site.remote.prompt }} tar -xvzf mpi4py.tar.gz  # extract the archive
-> {{ site.remote.prompt }} mv mpi4py* mpi4py        # rename the directory
-> {{ site.remote.prompt }} cd mpi4py
-> {{ site.remote.prompt }} python3 -m pip install --user .
-> {{ site.remote.prompt }} cd ../amdahl
-> {{ site.remote.prompt }} python3 -m pip install --user .
-> ```
-> {: .language-bash}
-{: .discussion}
-
-> ## If `pip` Raises a Warning...
->
-> `pip` may warn that your user package binaries are not in your PATH.
->
-> ```
-> WARNING: The script amdahl is installed in "${HOME}/.local/bin" which is
-> not on PATH. Consider adding this directory to PATH or, if you prefer to
-> suppress this warning, use --no-warn-script-location.
-> ```
-> {: .warning}
->
-> To check whether this warning is a problem, use `which` to search for the
-> `amdahl` program:
->
-> ```
-> {{ site.remote.prompt }} which amdahl
-> ```
-> {: .language-bash}
->
-> If the command returns no output, displaying a new prompt, it means the file
-> `amdahl` has not been found. You must update the environment variable named
-> `PATH` to include the missing folder.
-> Edit your shell configuration file as follows, then log off the cluster and
-> back on again so it takes effect.
->
-> ```
-> {{ site.remote.prompt }} nano ~/.bashrc
-> {{ site.remote.prompt }} tail ~/.bashrc
-> ```
-> {: .language-bash}
-> ```
-> export PATH=${PATH}:${HOME}/.local/bin
-> ```
-> {: .output}
->
-> After logging back in to {{ site.remote.login }}, `which` should be able to
-> find `amdahl` without difficulties.
-> If you had to load a Python module, load it again.
-{: .discussion}
 
 ## Help!
 
