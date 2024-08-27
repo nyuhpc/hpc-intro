@@ -94,9 +94,9 @@ message telling you so
 ## Loading and Unloading Software
 
 To load a software module, use `module load`. In this example we will use
-Python 3.
+R.
 
-Initially, Python 3 is not loaded. We can test this by using the `which`
+Initially, R is not loaded. We can test this by using the `which`
 command. `which` looks for programs the same way that Bash does, so we can use
 it to tell us where a particular piece of software is stored.
 
@@ -105,13 +105,13 @@ it to tell us where a particular piece of software is stored.
 ```
 {: .language-bash}
 
-{% include {{ site.snippets }}/modules/missing-python.snip %}
+{% include {{ site.snippets }}/modules/missing-r.snip %}
 
-We can load the `python3` command with `module load`:
+We can load the `R` command with `module load`:
 
-{% include {{ site.snippets }}/modules/module-load-python.snip %}
+{% include {{ site.snippets }}/modules/module-load-r.snip %}
 
-{% include {{ site.snippets }}/modules/python-executable-dir.snip %}
+{% include {{ site.snippets }}/modules/r-executable-dir.snip %}
 
 So, what just happened?
 
@@ -134,14 +134,15 @@ there's only one difference: the different directory at the beginning. When we
 ran the `module load` command, it added a directory to the beginning of our
 `$PATH`. Let's examine what's there:
 
-{% include {{ site.snippets }}/modules/python-ls-dir-command.snip %}
+{% include {{ site.snippets }}/modules/r-ls-dir-command.snip %}
 
-{% include {{ site.snippets }}/modules/python-ls-dir-output.snip %}
+{% include {{ site.snippets }}/modules/r-ls-dir-output.snip %}
 
 Taking this to its conclusion, `module load` will add software to your `$PATH`.
 It "loads" software. A special note on this - depending on which version of the
 `module` program that is installed at your site, `module load` will also load
-required software dependencies.
+required software dependencies. For instance loading the
+module `lammps/openmpi/intel/20231214` also loads:
 
 {% include {{ site.snippets }}/modules/software-dependencies.snip %}
 
@@ -176,11 +177,11 @@ Let's examine the output of `module avail` more closely.
 
 {% include {{ site.snippets }}/modules/available-modules.snip %}
 
-{% include {{ site.snippets }}/modules/wrong-gcc-version.snip %}
+{% include {{ site.snippets }}/modules/wrong-nextflow-version.snip %}
 
 > ## Using Software Modules in Scripts
 >
-> Create a job that is able to run `python3 --version`. Remember, no software
+> Create a job that is able to run `R --version`. Remember, no software
 > is loaded by default! Running a job is just like logging on to the system
 > (you should not assume a module loaded on the login node is loaded on a
 > compute node).
@@ -188,8 +189,8 @@ Let's examine the output of `module avail` more closely.
 > > ## Solution
 > >
 > > ```
-> > {{ site.remote.prompt }} nano python-module.sh
-> > {{ site.remote.prompt }} cat python-module.sh
+> > {{ site.remote.prompt }} nano r-module.sh
+> > {{ site.remote.prompt }} cat r-module.sh
 > > ```
 > > {: .language-bash}
 > >
@@ -199,9 +200,9 @@ Let's examine the output of `module avail` more closely.
 > > {{ site.sched.comment }} {{ site.sched.flag.qos }}
 > > {% endif %}{{ site.sched.comment }} {{ site.sched.flag.time }} 00:00:30
 > > 
-> > module load {{ site.remote.module_python3 }}
+> > module load r/gcc/4.4.0
 > >
-> > python3 --version
+> > R --version
 > > ```
 > > {: .output}
 > >

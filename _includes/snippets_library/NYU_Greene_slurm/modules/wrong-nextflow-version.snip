@@ -1,0 +1,37 @@
+Let's take a closer look at the `nextflow` module. Nextflow is a scientific
+workflow system predominantly used for bioinformatic data analysis
+In this case, we have:
+
+```
+   nextflow/20.07.1    nextflow/20.11.0-edge    nextflow/21.10.5    nextflow/23.04.1
+   nextflow/20.10.0    nextflow/21.04.3         nextflow/21.10.6    nextflow/24.04.3
+```
+{: .language-bash}
+
+How do we load each copy and which copy is the default?
+
+```
+{{ site.host_prompt }} module load Nextflow
+```
+{: .language-bash}
+
+```
+Lmod has detected the following error:  The following module(s) are unknown: "Nextflow"
+
+Please check the spelling or version number. Also try "module spider ..."
+It is also possible your cache file is out-of-date; it may help to try:
+  $ module --ignore-cache load "Nextflow"
+
+Also make sure that all modulefiles written in TCL start with the string #%Module
+
+
+```
+{: .output}
+
+To load a software module we must specify the full module name:
+
+```
+{{ site.host_prompt }} module load nextflow/24.04.3
+{{ site.host_prompt }} nextflow -version
+```
+{: .language-bash}
