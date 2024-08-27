@@ -122,7 +122,7 @@ You do not need to use the NYU VPN or gateways if you are connected to the NYU n
 connection in your office or WiFi) or if you have VPN connection initiated. In this case you
 can ssh directly to the clusters.
 
-> ## Before copying these command typing them on your computer
+> ## Before copying these commands and typing them on your computer
 >
 > Replace `{{ site.remote.user }}` with your NetID for all the instructions below!
 {: .callout}
