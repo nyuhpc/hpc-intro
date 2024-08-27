@@ -48,7 +48,7 @@ $ printenv
 ~~~
 SHELL=/bin/bash
 WINDOWID=87
-SINGULARITY_CACHEDIR=/state/partition1/yourUsername-singularity-cache
+SINGULARITY_CACHEDIR=/state/partition1/NYUNetID-singularity-cache
 COLORTERM=truecolor
 HISTCONTROL=ignoredups
 HISTSIZE=1000
@@ -56,7 +56,7 @@ HOSTNAME=log-3
 FPATH=/usr/share/zsh/5.5.1/functions:/usr/share/zsh/5.5.1/functions:/share/apps/lmod/8.4.9/lmod/lmod/init/ksh_funcs
 SSH_AUTH_SOCK=/tmp/ssh-XXXXb32gan/agent.3025643
 __LMOD_REF_COUNT_MODULEPATH=/share/apps/modulefiles:1
-VAST=/vast/yourUsername
+VAST=/vast/NYUNetID
 LMOD_DIR=/share/apps/lmod/8.4.9/lmod/lmod/libexec
 ...
 ~~~
@@ -100,7 +100,7 @@ $ echo $HOME
 {: .language-bash}
 
 ~~~
-/home/yourUsername
+/home/NYUNetID
 ~~~
 {: .output}
 
@@ -108,7 +108,7 @@ The dollar sign tells the shell that we want the *value* of the variable
 rather than its name.
 This works just like wildcards:
 the shell does the replacement *before* running the program we've asked for.
-Thanks to this expansion, what we actually run is `echo /home/yourUsername`,
+Thanks to this expansion, what we actually run is `echo /home/NYUNetID`,
 which displays the right thing.
 
 ## Creating and Changing Variables
@@ -227,8 +227,8 @@ here are the components of `PATH` listed one per line:
 ~~~
 /share/apps/singularity/bin
 /share/apps/local/bin
-/home/yourUsername/.local/bin
-/home/yourUsername/bin
+/home/NYUNetID/.local/bin
+/home/NYUNetID/bin
 /share/apps/singularity/bin
 /share/apps/local/bin
 /usr/local/bin
@@ -245,12 +245,12 @@ there are actually three programs called `analyze`
 in three different directories:
 `/bin/analyze`,
 `/usr/local/bin/analyze`,
-and `/users/yourUsername/analyze`.
+and `/users/NYUNetID/analyze`.
 Since the shell searches the directories in the order they're listed in `PATH`,
 it finds `/bin/analyze` first and runs that.
-Notice that it will *never* find the program `/users/yourUsername/analyze`
+Notice that it will *never* find the program `/users/NYUNetID/analyze`
 unless we type in the full path to the program,
-since the directory `/users/yourUsername` isn't in `PATH`.
+since the directory `/users/NYUNetID` isn't in `PATH`.
 
 This means that I can have executables in lots of different places as long as
 I remember that I need to to update my `PATH` so that my shell can find them.

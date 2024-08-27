@@ -125,7 +125,7 @@ can ssh directly to the clusters.
 
 > ## Before copying these command typing them on your computer
 >
-> Replace `{{ site.remote.user }}` with your username for all the instructions below!
+> Replace `{{ site.remote.user }}` with your NetID for all the instructions below!
 {: .callout}
 
 If you choose the Gateway Option, start by hopping onto the gateway nodes first by:

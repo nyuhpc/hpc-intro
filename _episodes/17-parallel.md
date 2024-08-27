@@ -54,7 +54,7 @@ it in your ("user") home directory:
 {: .language-bash}
 
 ```
-Processing /home/ss19980/packages/temp/hpc-carpentry-amdahl-46c9b4b
+Processing /home/NYUNetID/packages/temp/hpc-carpentry-amdahl-46c9b4b
 Collecting mpi4py
   Using cached mpi4py-4.0.0.tar.gz (464 kB)
   Installing build dependencies ... done
@@ -64,15 +64,15 @@ Collecting mpi4py
 Building wheels for collected packages: amdahl, mpi4py
   Building wheel for amdahl (setup.py) ... done
   Created wheel for amdahl: filename=amdahl-0.3.1-py3-none-any.whl size=6996 sha256=13a95c3e6fbc53fde1c90a4a9bbb3fd3179d5e3afa3e19b4131a05d9ac798981
-  Stored in directory: /home/ss19980/.cache/pip/wheels/2c/53/fc/19c3053b3a1d3625ac26158b28f263783f66ec258df97aefcf
+  Stored in directory: /home/NYUNetID/.cache/pip/wheels/2c/53/fc/19c3053b3a1d3625ac26158b28f263783f66ec258df97aefcf
   Building wheel for mpi4py (PEP 517) ... done
   Created wheel for mpi4py: filename=mpi4py-4.0.0-cp38-cp38-linux_x86_64.whl size=5169079 sha256=9afceb56e22608a7de33442a60bbde3cbd4aa06947d48de5f6dc63932d34bc9f
-  Stored in directory: /home/ss19980/.cache/pip/wheels/31/3b/6f/dc579e9ff3e2273078596b0cbc1e8d6cbf5a3a05cfad4a380a
+  Stored in directory: /home/NYUNetID/.cache/pip/wheels/31/3b/6f/dc579e9ff3e2273078596b0cbc1e8d6cbf5a3a05cfad4a380a
 Successfully built amdahl mpi4py
 Installing collected packages: mpi4py, amdahl
 Successfully installed amdahl-0.3.1 mpi4py-4.0.0
 WARNING: You are using pip version 20.2.3; however, version 24.2 is available.
-You should consider upgrading via the '/home/ss19980/packages/temp/hpc-carpentry-amdahl-46c9b4b/test_venv/bin/python3 -m pip install --upgrade pip' command.
+You should consider upgrading via the '/home/NYUNetID/packages/temp/hpc-carpentry-amdahl-46c9b4b/test_venv/bin/python3 -m pip install --upgrade pip' command.
 ```
 {: .output}
 

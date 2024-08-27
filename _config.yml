@@ -44,9 +44,9 @@ remote:
   host: "log-1"
   node: "cs"
   location: "New York University, New York, NY, USA"
-  homedir: "/home/youUsername"
-  user: "yourUsername"
-  prompt: "[yourUsername@log-1 ~]$"
+  homedir: "/home/NYUNetID"
+  user: "NYUNetID"
+  prompt: "[NYUNetID@log-1 ~]$"
   bash_shebang: "#!/bin/bash"
 
 sched:
