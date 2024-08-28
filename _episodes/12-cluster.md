@@ -100,7 +100,7 @@ system files and change as you install new software or upgrade your OS.
 > * __RPS__ -- provides data storage space for research projects that is
 >   easily shared amongst collaborators, backed up, and not subject to the
 >   old file purging policy. Note that it is a paid service.
-> * __Archive__ -- provide a space for long-term storage of research output
+> * __Archive__ -- provides a space for long-term storage of research output
 >   and is unaccessible by running jobs.
 {: .callout}
 
