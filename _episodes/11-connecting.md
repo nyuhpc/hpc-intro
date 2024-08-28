@@ -70,9 +70,9 @@ _and_ make it more convenient to log in to remote systems.
 The Greene cluster has multiple login nodes (`log-1`, `log-2`, `log-3`) any of which
 can be assigned as the login node. This can sometimes lead to the following warning:
 ```
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
 Someone could be eavesdropping on you right now (man-in-the-middle attack)!
@@ -85,7 +85,6 @@ following lines in it:
 ```
 Host greene.hpc.nyu.edu dtn.hpc.nyu.edu
   StrictHostKeyChecking no
-  ServerAliveInterval 60
   ForwardAgent yes
   StrictHostKeyChecking no
   UserKnownHostsFile /dev/null
