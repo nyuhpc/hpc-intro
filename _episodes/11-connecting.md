@@ -132,11 +132,10 @@ If you choose the Gateway Option, start by hopping onto the gateway nodes first 
 ```
 {: .language-bash}
 
-You are now finally ready to connect to the Greene cluster. To login, go ahead and open
-your terminal or graphical SSH client and execute the following command:
+You are now finally ready to connect to the Greene cluster. To login, execute the following command:
 
 ```
-{{ site.local.prompt }} ssh {{ site.remote.user }}@{{ site.remote.login }}
+{{ site.remote.user }}@pco01la-1520b ssh {{ site.remote.user }}@{{ site.remote.login }}
 ```
 {: .language-bash}
 
