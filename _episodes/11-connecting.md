@@ -189,7 +189,7 @@ by running `pwd` to **p**rint the **w**orking **d**irectory.
 {: .language-bash}
 
 ```
-{{ site.remote.homedir }}/{{ site.remote.user }}
+{{ site.remote.homedir }}/
 ```
 {: .output}
 

@@ -101,7 +101,7 @@ command. `which` looks for programs the same way that Bash does, so we can use
 it to tell us where a particular piece of software is stored.
 
 ```
-{{ site.remote.prompt }} which python3
+{{ site.remote.prompt }} which R
 ```
 {: .language-bash}
 
